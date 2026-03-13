@@ -1,0 +1,50 @@
+Challenge Lab: Python Scripting Exercise
+ 
+Duration
+This lab takes approximately 40 minutes to complete.
+ 
+Launch Your Lab Environment
+1.	At the top of these instructions, click Start Lab to launch this lab.
+A Start Lab panel opens displaying the lab status.
+2.	Wait until you see the message "Lab status: ready", then click the X to close the Start Lab panel.
+This lab launches an EC2 instance named Linux Host. You will use this server to develop Python scripts.
+3.	Click the Details drop down menu above these instructions, and then click Show. Copy the value of the ips -- public field to a text file and save the file as Lab Details.txt, using a text editor such as Atom, Sublime Text or Visual Studio Code. This value is the public IP address of the Linux Host. The information you have saved will be referred to as Lab Details in the lab.
+ 
+Using SSH to Connect to the Linux Host
+ Windows Users: Using SSH to Connect
+These instructions are specifically for Windows users. If you are using macOS or Linux, skip to the next section.
+4.	Select the Details drop-down menu above these instructions you are currently reading, and then select Show. A Credentials window will be presented.
+5.	Select the Download PPK button and save the labsuser.ppk file. Typically your browser will save it to the Downloads directory.
+6.	Make a note of the PublicIP address.
+7.	Then exit the Details panel by selecting the X.
+8.	Download PuTTY to SSH into the Amazon EC2 instance. If you do not have PuTTY installed on your computer, download it here.
+9.	Open putty.exe
+10.	Configure your PuTTY session by following the directions in the following link: Connect to your Linux instance using PuTTY
+11.	Windows Users: Select here to skip ahead to the next task.
+macOS  and Linux  Users
+These instructions are specifically for Mac/Linux users. If you are a Windows user, skip ahead to the next task.
+12.	Click the Details drop down menu above the instructions you are currently reading, and then click Show. A Credentials window will be presented.
+13.	Click the Download PEM button and save the labsuser.pem file.
+14.	Exit the Details panel by clicking the X.
+15.	Open a terminal window, and change directory cd to the directory where the labsuser.pem file was downloaded. For example, if the labsuser.pem file was saved to your Downloads directory, run this command:
+cd ~/Downloads
+16.	Change the permissions on the key to be read-only, by running this command:
+chmod 400 labsuser.pem
+17.	Run the command below (replace <public-ip> with the Linux Host IP address you saved in the Lab Details file earlier).
+ssh -i labsuser.pem ec2-user@<public-ip>
+18.	Type yes when prompted to allow the first connection to this remote SSH server. Because you are using a key pair for authentication, you will not be prompted for a password.
+ 
+Your Challenge
+•	Write a Python script to:
+o	Display all the prime numbers between 1 to 250.
+o	Store the results in a results.txt file.
+•	Test the script. Verify that it produced the expected results in the results.txt file.
+•	Save the script and make a note of its location (absolute path) for future reference.
+Note: Both Python 2 and Python 3 are installed on the Linux Host. It is recommended to use Python 3. To run a Python script using version 3, run the following command by replacing file.py with your file name.
+python3 file.py
+Lab Complete
+When you are finished with the lab:
+19.	Click End Lab at the top of this page and then click Yes to confirm that you want to end the lab. A panel will appear indicating that "Lab resources are stopping."
+20.	Click the X in the top right corner to close the panel. Your lab resources are persisted and accessible to you when you start the lab again.
+Additional Resources
+For more information about AWS Training and Certification, see https://aws.amazon.com/training/.  Your feedback is welcome and appreciated. If you would like to share any suggestions or corrections, please provide the details in our AWS Training and Certification Contact Form.  © 2022 Amazon Web Services, Inc. and its affiliates. All rights reserved. This work may not be reproduced or redistributed, in whole or in part, without prior written permission from Amazon Web Services, Inc. Commercial copying, lending, or selling is prohibited.

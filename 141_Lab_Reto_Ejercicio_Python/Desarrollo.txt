@@ -1,0 +1,314 @@
+## Crear el archivo del script
+
+
+
+nano prime_numbers.py
+
+
+---
+
+## Código
+
+python
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+with open("results.txt", "w") as file:
+    for number in range(1, 251):
+        if is_prime(number):
+            file.write(str(number) + "\n")
+
+print("Prime numbers saved to results.txt")
+
+
+---
+
+## Guardar el archivo
+
+Comandos:
+
+
+CTRL + O
+ENTER
+CTRL + X
+
+
+---
+
+# Ejecutar el script
+
+
+python3 prime_numbers.py
+
+
+---
+
+# Verificar el archivo
+
+
+cat results.txt
+
+---
+
+# Obtener la ruta absoluta
+
+pwd
+
+El script está en:
+
+
+/home/ec2-user/prime_numbers.py
+
+
+## Exportar a Github
+
+# Configurar la primera vez
+
+git config --global user.name "Lizeth-Buitrago"
+
+
+---
+
+# Verifica que tu archivo está en el servidor
+
+Escribe:
+
+
+ls
+
+
+Resultado:
+
+
+prime_numbers.py
+results.txt
+
+
+---
+
+# Inicializa Git en la carpeta 
+
+
+git init
+
+
+---
+
+#  Agrega los archivos al repositorio
+
+
+git add prime_numbers.py
+
+
+(opcional)
+
+
+git add results.txt
+
+
+O para agregar todo:
+
+
+git add .
+
+
+---
+
+#  Crear el commit
+
+
+git commit -m "Python script prime numbers 1 to 250"
+
+
+---
+
+# Conectar con tu repositorio de GitHub
+
+
+Luego ejecuta:
+
+
+git remote add origin https://github.com/Lizeth-Buitrago/AWS_RE_STAR.git
+
+
+---
+
+#  Subir el código
+
+
+git branch -M main
+
+
+
+git push -u origin main
+
+
+---
+
+#  Autenticación
+
+GitHub te pedirá:
+
+* **Username:** tu usuario de GitHub
+* **Password:** Personal Access Token.
+
+---
+
+#  Verifica
+
+Entra a tu repositorio en GitHub y deberías ver:
+
+* prime_numbers.py
+* results.txt
+
+---
+
+ **Tip importante:**
+
+Si tu repositorio **ya tenía archivos (por ejemplo README)**, puede aparecer un error al hacer `push`.
+Si te pasa, se arregla con:
+
+
+git pull origin main --rebase
+
+
+y luego otra vez:
+
+
+git push -u origin main
+
+
+---
+
+
+# Posible Error: `Permission denied`
+
+Al escribir:
+
+
+/home/ec2-user/prime_numbers.py
+
+
+Eso intenta **ejecutar el archivo como programa**, pero tu script es de **Python**, por eso aparece:
+
+
+Permission denied
+
+
+La forma correcta de ejecutarlo es:
+
+
+python3 prime_numbers.py
+
+
+---
+
+# Error: `git: command not found`
+
+Esto significa que **Git no está instalado en el servidor EC2**.
+
+Instalarlo con este comando:
+
+
+sudo yum install git -y
+
+
+Espera unos segundos mientras se instala.
+
+---
+
+#  Verifica que Git se instaló
+
+
+git --version
+
+
+Debería mostrar algo como:
+
+
+git version 2.xx.x
+
+
+---
+
+# Posible error 
+
+
+Ocurre porque tu repositorio local está en la rama **`master`**, pero intentaste subir a **`main`**.
+
+En tu pantalla se ve esto:
+
+
+[master (root-commit) ...]
+
+
+Eso significa que la rama actual es **master**, por eso aparece el error:
+
+
+error: src refspec main does not match any
+
+
+---
+
+# Solución rápida
+
+Ejecuta este comando para cambiar el nombre de la rama a **main**:
+
+
+git branch -M main
+
+
+Luego vuelve a subir el código:
+
+
+git push -u origin main
+
+
+---
+
+#  Lo que debería pasar después
+
+GitHub te pedirá:
+
+* **Username:** tu usuario de GitHub
+* **Password:** Personal Access Token
+
+---
+
+# Si todo sale bien verás algo como
+
+
+Counting objects: 3, done.
+Writing objects: 100% ...
+To https://github.com/Lizeth-Buitrago/AWS_RE_STAR.git
+ * [new branch] main -> main
+
+
+Y tu archivo aparecerá en el repositorio:
+
+```
+prime_numbers.py
+```
+
+
+
+ **Tip importante para tu lab:**
+Si tu repositorio en GitHub **ya tenía un README**, puede salir otro error. Si pasa, se arregla con:
+
+
+git pull origin main --rebase
+
+
+y luego:
+
+
+git push -u origin main
+
+
+---
