@@ -1,0 +1,405 @@
+---
+
+# ✅ 1. Instalar Git en tu instancia de AWS
+
+Como estás usando **Amazon Linux**, ejecuta este comando:
+
+```bash
+sudo yum install git -y
+```
+
+Espera a que termine la instalación.
+
+---
+
+# ✅ 2. Verificar que Git quedó instalado
+
+Después ejecuta:
+
+```bash
+git --version
+```
+
+Deberías ver algo parecido a:
+
+```bash
+git version 2.40.1
+```
+
+---
+
+# ✅ 3. Ahora vuelve a clonar tu repositorio de GitHub
+
+Ejecuta nuevamente:
+
+```bash
+git clone https://github.com/Lizeth-Buitrago/AWS_RE_STAR.git
+```
+
+Si todo funciona, aparecerá algo como:
+
+```bash
+Cloning into 'AWS_RE_STAR'...
+remote: Enumerating objects...
+```
+
+---
+
+# ✅ 4. Entrar al repositorio
+
+```bash
+cd AWS_RE_STAR
+```
+
+---
+
+# ✅ 5. Ver las carpetas del repositorio
+
+```bash
+ls
+```
+
+Aquí podrás entrar a la carpeta donde quieres guardar tu archivo.
+
+---
+
+Perfecto, **Git ya se instaló correctamente** 👍.
+El nuevo error que aparece es este:
+
+```bash
+fatal: could not create work tree dir 'AWS_RE_STAR': Permission denied
+```
+
+Eso significa que **no tienes permisos para crear carpetas en la ubicación donde estás**.
+
+En tu terminal se ve que estás en una carpeta del sistema (probablemente `/var/www/html`), donde el usuario **`ssm-user` o `sh` no puede escribir**.
+
+---
+
+# ✅ Solución
+
+Debes moverte a tu **directorio personal**, donde sí tienes permisos.
+
+Ejecuta:
+
+```bash
+cd ~
+```
+
+Esto te lleva a tu carpeta de usuario.
+
+Verifica dónde estás:
+
+```bash
+pwd
+```
+
+Debería mostrar algo como:
+
+```bash
+/home/ssm-user
+```
+
+o
+
+```bash
+/home/ec2-user
+```
+
+---
+
+# 2️⃣ Ahora vuelve a clonar el repositorio de GitHub
+
+```bash
+git clone https://github.com/Lizeth-Buitrago/AWS_RE_STAR.git
+```
+
+Ahora **sí debería funcionar** y verás algo como:
+
+```
+Cloning into 'AWS_RE_STAR'...
+remote: Enumerating objects...
+```
+
+---
+
+# 3️⃣ Entrar al repositorio
+
+```bash
+cd AWS_RE_STAR
+```
+
+---
+
+# 4️⃣ Ver las carpetas
+
+```bash
+ls
+```
+
+Ahí podrás entrar a **la carpeta específica donde quieres subir tu archivo**.
+
+---
+
+💡 **Tip importante para AWS Session Manager:**
+Cuando ves este prompt:
+
+```bash
+sh-4.2$
+```
+
+muchas veces estás en carpetas protegidas como:
+
+```
+/var/www
+```
+
+y por eso salen errores de permisos.
+
+---
+
+Si no sabes **dónde quedó el archivo JSON ni cómo se llama**, puedes **buscarlo en toda la instancia de AWS** con comandos de Linux. Te explico las formas más fáciles.
+
+---
+
+# 1️⃣ Buscar todos los archivos `.json`
+
+Ejecuta este comando:
+
+```bash
+find / -name "*.json" 2>/dev/null
+```
+
+Esto hará que el sistema busque **todos los archivos JSON en la máquina**.
+
+* `find /` → busca desde la raíz
+* `*.json` → archivos con extensión JSON
+* `2>/dev/null` → oculta errores de permisos
+
+Te mostrará algo como:
+
+```
+/home/ec2-user/data.json
+/home/ec2-user/output.json
+/var/www/html/config.json
+```
+
+---
+
+# 2️⃣ Buscar solo en tu carpeta de usuario (más rápido)
+
+```bash
+find ~ -name "*.json"
+```
+
+Esto busca solo en tu directorio personal.
+
+---
+
+# 3️⃣ Ver el contenido para confirmar
+
+Cuando encuentres el archivo puedes abrirlo con:
+
+```bash
+cat nombre_archivo.json
+```
+
+o
+
+```bash
+less nombre_archivo.json
+```
+
+---
+
+# 4️⃣ Copiar el archivo al repositorio de GitHub
+
+Supongamos que el archivo está en:
+
+```bash
+/home/ec2-user/archivo.json
+```
+
+y tu repositorio clonado está en:
+
+```
+/home/ec2-user/AWS_RE_STAR
+```
+
+Entonces haces:
+
+```bash
+cp /home/ec2-user/archivo.json /home/ec2-user/AWS_RE_STAR/
+```
+
+---
+
+# 5️⃣ Subirlo a tu repositorio en GitHub
+
+Entra al repositorio:
+
+```bash
+cd ~/AWS_RE_STAR
+```
+
+Luego:
+
+```bash
+git add archivo.json
+```
+
+```bash
+git commit -m "Add JSON file"
+```
+
+```bash
+git push
+```
+
+---
+
+✅ **Consejo:**
+Si no sabes **qué archivos hay en la carpeta actual**, ejecuta:
+
+```bash
+ls
+```
+
+o para ver más detalle:
+
+```bash
+ls -l
+```
+
+---
+
+El error que te aparece:
+
+```
+cd: AWS_RE_STAR: No such file or directory
+```
+
+significa que **el repositorio no está en esa carpeta** o **aún no lo has clonado en esa instancia**. No te preocupes, lo arreglamos fácil. 👍
+
+---
+
+# 1️⃣ Primero verifica qué carpetas tienes
+
+Ejecuta:
+
+```bash
+ls
+```
+
+Si **no aparece `AWS_RE_STAR`**, entonces debes clonarlo.
+
+---
+
+# 2️⃣ Clonar tu repositorio de GitHub
+
+Ejecuta:
+
+```bash
+git clone https://github.com/Lizeth-Buitrago/AWS_RE_STAR.git
+```
+
+Cuando termine, revisa:
+
+```bash
+ls
+```
+
+Ahora debería aparecer la carpeta:
+
+```
+AWS_RE_STAR
+```
+
+---
+
+# 3️⃣ Entrar al repositorio
+
+```bash
+cd AWS_RE_STAR
+```
+
+Verifica las carpetas dentro:
+
+```bash
+ls
+```
+
+Deberías ver algo como:
+
+```
+169_Lab_Uso_AWS_Systems_Manager
+```
+
+---
+
+# 4️⃣ Entrar a la carpeta del lab
+
+```bash
+cd 169_Lab_Uso_AWS_Systems_Manager
+```
+
+---
+
+# 5️⃣ Crear el archivo JSON del lab
+
+Ahora ejecuta:
+
+```bash
+aws ec2 describe-instances > ec2-info.json
+```
+
+Verifica que se creó:
+
+```bash
+ls
+```
+
+Debería aparecer:
+
+```
+ec2-info.json
+```
+
+---
+
+# 6️⃣ Subir el archivo al repositorio
+
+```bash
+git add ec2-info.json
+```
+
+```bash
+git commit -m "Add EC2 describe instances JSON"
+```
+
+```bash
+git push
+```
+
+---
+
+✅ Al final tu archivo quedará en:
+
+```
+AWS_RE_STAR
+ └── 169_Lab_Uso_AWS_Systems_Manager
+      └── ec2-info.json
+```
+
+---
+en el comit me genera error not allowed
+
+# Configura tu nombre y correo (usa el correo que tienes en GitHub)
+git config --global user.name "Lizeth-Buitrago"
+git config --global user.email "tu_correo@ejemplo.com"
+
+# Corrige el commit que ya hiciste para que quede con tu identidad
+git commit --amend --reset-author
+
+# Sube el commit corregido al repositorio remoto
+git push origin main --force
